@@ -1,28 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload picture</title>
-</head>
-<body>
-<nav>
-    <li>
-      <a href="{{ url_for('photos') }}" style="text-decoration: none;">
-        <button type="button" class="btn-create">Photos</button>
-      </a>
-    </li>
-  </nav>
-  <div style="text-align: center;">
-    <h1>Upload photos 📷</h1>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload picture</title>
+  </head>
+  <body>
+    <nav>
+      <li>
+        <a href="{{ url_for('photos') }}" style="text-decoration: none">
+          <button type="button" class="btn-create">Photos</button>
+        </a>
+      </li>
+    </nav>
+    <div style="text-align: center">
+      <h1>Upload photos 📷</h1>
 
-    <form id="upload-form">
-      <input type="file" id="photo-upload" name="photo[]" accept="image/*" multiple>
-      <br><br>
-      <button type="submit">Upload</button>
-    </form>
-
-  </div>
-</body>
+      <form id="upload-form" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file-to-save" accept="image/*" multiple />
+        <br /><br />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </body>
 </html>

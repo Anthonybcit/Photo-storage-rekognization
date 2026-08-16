@@ -1,11 +1,11 @@
 import boto3
-
+from config import Config
 def detect_labels(photo, bucket):
 
     client=boto3.client('rekognition', region_name='us-east-2')
 
     response = client.detect_labels(Image={'S3Object':{'Bucket':'projecttest-106490371129-us-east-2-an','Name':'MV5BMWQzYjY3MjEtOGEzMC00YTJjLWI0ZmEtZGQwNDVhNWQ0YTVjXkEyXkFqcGdeQXVyMTE5NDQ1MzQ3._V1_.jpg'}},
-        MaxLabels=10)
+        MaxLabels=10, MinConfidence=60)
 
     print('Detected labels for ' + photo) 
     print()   
