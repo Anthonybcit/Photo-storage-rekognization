@@ -1,7 +1,11 @@
 import boto3
 import uuid
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from config import Config
+from pymongo import MongoClient
+
+
+mongo = MongoClient(Config.MONGO_URI)
 
 region = Config.region
 client=boto3.client('rekognition', region_name=region)
@@ -20,7 +24,9 @@ def detect_labels(photo, bucket):
         labellist.append({"name": label["Name"], "confidence": label["Confidence"]})
     return labellist
 
-
+maindb = mongo 
+db = maindb["Project"]
+labeldb = db["labels"]
 app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -37,7 +43,16 @@ def index():
             new_filename = uuid.uuid4().hex + '.' + uploaded_file.filename.rsplit('.', 1)[1].lower()
             s3.Bucket(bucket_name).upload_fileobj(uploaded_file, new_filename)
             labels = detect_labels(new_filename, bucket_name)
-            return "Upload successful"
+            
+            labelz = {
+                "name" : new_filename,
+                "labels":labels
+            }
+
+
+            labeldb.insert_one(labelz)
+        return redirect(url_for("index"))
+        
     return render_template("index.html")
 
 @app.route("/photos", methods=["GET", "POST"])

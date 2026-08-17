@@ -1,5 +1,7 @@
 import boto3
 from config import Config
+
+
 def detect_labels(photo, bucket):
 
     client=boto3.client('rekognition', region_name='us-east-2')
