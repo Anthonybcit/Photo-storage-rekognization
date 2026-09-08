@@ -50,7 +50,11 @@ body {
   gap: 24px;
   align-items: center;
 }
-
+.search {
+  width: max-content;
+  display: flex;
+  align-items: center;
+}
 .navbar a {
   text-decoration: none;
   color: #ffffff;

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-       <meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Photo Library</title>
 
@@ -22,10 +22,14 @@
       href="{{ url_for('static', filename='styles.css') }}"
     />
   </head>
+
   <body>
     <header class="site-header">
       <div class="header-container">
-        <h1><a href="/" class="header-logo-link"> Photo Library </a></h1>
+        <h1>
+          <a href="/" class="header-logo-link">Photo Library</a>
+        </h1>
+
         <nav class="navbar">
           <ul>
             <li><a href="/">Upload</a></li>
@@ -34,9 +38,8 @@
         </nav>
       </div>
     </header>
-  
+
     <main class="main-content">
-     
       <form action="{{ url_for('search') }}" method="GET">
         <div class="search">
           <input
@@ -48,25 +51,26 @@
           <button type="submit">Search</button>
         </div>
       </form>
- 
+
       <section class="card-grid">
-        {% for photo in photos %}
+        {% for photo in results %}
+
         <div class="card">
-          
           <div class="card-img">
             <img src="{{ photo.url }}" alt="{{ photo.name }}" />
           </div>
-          
+
           <div class="card-content">
-            
             <h3 class="title">{{ photo.name }}</h3>
-            
+
             <div class="labels">
-                <b>Tags:</b>
+              <b>Tags:</b>
+
               {% for label in photo.labels %}
-              <span class="label"> {{ label.name }} </span> {% endfor %}
+              <span class="label">{{ label.name }}</span>
+              {% endfor %}
             </div>
-             <a href="{{ photo.url }}" class="download-button" title="Download">
+            <a href="{{ photo.url }}" class="download-button" title="Download">
               <span class="material-symbols-outlined">download</span>
             </a>
             <form action="{{ url_for('delete') }}" method="POST">
@@ -78,6 +82,7 @@
             </form>
           </div>
         </div>
+
         {% endfor %}
       </section>
     </main>

@@ -1,18 +1,32 @@
 <!doctype html>
-<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Upload picture</title>
+    <title>Photo Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
   </head>
   <body>
-    <nav>
-      <li>
-        <a href="{{ url_for('photos') }}" style="text-decoration: none">
-          <button type="button" class="btn-create">Photos</button>
-        </a>
-      </li>
-    </nav>
+     <header class="site-header">
+      <div class="header-container">
+        <h1><a href="/" class="header-logo-link"> Photo Library </a></h1>
+        <nav class="navbar">
+          <ul>
+            <li><a href="/">Upload</a></li>
+            <li><a href="{{ url_for('photos') }}">Photos</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
     <div style="text-align: center">
       <h1>Upload photos 📷</h1>
 
